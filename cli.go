@@ -103,6 +103,9 @@ func reflectStruct(i interface{}) []*reflected {
 
 // Init bind and parse flags
 func (cmd Cmd) Init(args []string) error {
+	if cmd.Opts == nil {
+		return nil
+	}
 	flags := flag.NewFlagSet(cmd.Name, flag.ExitOnError)
 	for _, ref := range reflectStruct(cmd.Opts) {
 		opt := &Opt{
